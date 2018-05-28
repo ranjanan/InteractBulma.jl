@@ -1,7 +1,7 @@
 wrap(::Bulma, ui, f = dom"div.field.interactbulma") = wrap(NativeHTML(), ui, f)
 wrapclass(ui) = wrap(ui, dom"div.interactbulma")
 
-function filepicker(::Bulma, args...; class="", label = "Choose a file...", kwargs...)
+function filepicker(::Bulma, label = "Choose a file..."; class="", kwargs...)
     postprocess = t ->
     dom"div.file"(
         dom"label.file-label"(
