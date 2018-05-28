@@ -17,7 +17,7 @@ function filepicker(::Bulma, label = "Choose a file..."; class="", kwargs...)
             dom"span.file-name"("{{filename == '' ? 'No file chosen' : filename}}")
         )
     )
-    filepicker(NativeHTML(), args...; postprocess = postprocess, class="interactbulma file-input $class", kwargs...) |> wrap
+    filepicker(NativeHTML(), label; postprocess = postprocess, class="interactbulma file-input $class", kwargs...) |> wrap
 end
 
 function dropdown(T::Bulma, options::Associative; label = nothing, class="", outer = dom"div.interactbulma"∘vbox, kwargs...)
