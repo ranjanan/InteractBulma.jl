@@ -25,6 +25,8 @@ function getclass(T::Bulma, arg, typ...)
         return "interactbulma field is-grouped has-addons is-oneline is-centered"
     elseif arg==:tabs
         return "interactbulma tabs"
+    elseif arg==:radiobuttons
+        return "interactbulma field"
     else
         return "interactbulma"
     end

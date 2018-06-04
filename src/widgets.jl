@@ -18,13 +18,6 @@ function filepicker(::Bulma, lbl = "Choose a file..."; label=lbl, class="", kwar
     isdefined(InteractBase, :wrapfield) ? InteractBase.wrapfield(fp) : fp
 end
 
-function radiobuttons(T::Bulma, options::Associative; outer = identity, outer_attributes = Dict(), kwargs...)
-    outerfunction = function (args...)
-        outer(Node(:div, className = "field", attributes = outer_attributes))(Iterators.flatten(args)...)
-    end
-    radiobuttons(NativeHTML(), options::Associative; outer = outerfunction, kwargs...)
-end
-
 function radio(T::Bulma, s, key, val, vmodel; class = "", kwargs...)
     id = string(gensym())
     (Node(:input, className = "is-checkradio $class", attributes = Dict(:id => id, :name=>s, :type=>"radio", vmodel=>"value", :value=>val)),
