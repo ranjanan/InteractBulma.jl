@@ -15,23 +15,8 @@ function filepicker(::Bulma, lbl = "Choose a file..."; label=lbl, class="", kwar
                 dom"span.file-name"("{{filename == '' ? 'No file chosen' : filename}}")
             )
         )
-    InteractBase.wrapfield(fp)
+    isdefined(InteractBase, :wrapfield) ? InteractBase.wrapfield(fp) : fp
 end
-
-function togglebuttons(::Bulma, options::Associative;
-    class="is-fullwidth", outer = identity, outer_attributes = Dict(), activeclass = "is-primary is-selected", kwargs...)
-
-    togglebuttons(NativeHTML(), options;
-        outer = outer∘Node(
-            :div, className = "interactbulma field is-grouped has-addons is-oneline is-centered", attributes = outer_attributes
-        ), class = "button $class", activeclass = activeclass, tag = :span, kwargs...)
-end
-
-tabs(::Bulma, options::Associative; class="", outer = identity, outer_attributes = Dict(), activeclass = "is-active", kwargs...) =
-    tabs(NativeHTML(), options;
-        outer = outer∘Node(:ul, className = "interactbulma tabs", attributes = outer_attributes),
-        class = class, activeclass = activeclass, kwargs...)
-
 
 function radiobuttons(T::Bulma, options::Associative; outer = identity, outer_attributes = Dict(), kwargs...)
     outerfunction = function (args...)
@@ -39,7 +24,6 @@ function radiobuttons(T::Bulma, options::Associative; outer = identity, outer_at
     end
     radiobuttons(NativeHTML(), options::Associative; outer = outerfunction, kwargs...)
 end
-
 
 function radio(T::Bulma, s, key, val, vmodel; class = "", kwargs...)
     id = string(gensym())
