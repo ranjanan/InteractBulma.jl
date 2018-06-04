@@ -1,5 +1,3 @@
-wrapclass(ui) = wrap(ui, dom"div.interactbulma")
-
 function filepicker(::Bulma, lbl = "Choose a file..."; label=lbl, class="", kwargs...)
     fp = filepicker(NativeHTML(), label; class="interactbulma file-input $class", kwargs...)
     scope(fp).dom =
@@ -17,7 +15,7 @@ function filepicker(::Bulma, lbl = "Choose a file..."; label=lbl, class="", kwar
                 dom"span.file-name"("{{filename == '' ? 'No file chosen' : filename}}")
             )
         )
-    wrapfield(fp)
+    InteractBase.wrapfield(fp)
 end
 
 function togglebuttons(::Bulma, options::Associative;
@@ -26,13 +24,13 @@ function togglebuttons(::Bulma, options::Associative;
     togglebuttons(NativeHTML(), options;
         outer = outer∘Node(
             :div, className = "interactbulma field is-grouped has-addons is-oneline is-centered", attributes = outer_attributes
-        ), class = "button $class", activeclass = activeclass, tag = :span, kwargs...) |> wrapclass
+        ), class = "button $class", activeclass = activeclass, tag = :span, kwargs...)
 end
 
 tabs(::Bulma, options::Associative; class="", outer = identity, outer_attributes = Dict(), activeclass = "is-active", kwargs...) =
     tabs(NativeHTML(), options;
         outer = outer∘Node(:ul, className = "interactbulma tabs", attributes = outer_attributes),
-        class = class, activeclass = activeclass, kwargs...) |> wrapclass
+        class = class, activeclass = activeclass, kwargs...)
 
 
 function radiobuttons(T::Bulma, options::Associative; outer = identity, outer_attributes = Dict(), kwargs...)
