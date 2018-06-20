@@ -2,7 +2,6 @@ __precompile__()
 
 module InteractBulma
 
-using AssetRegistry
 using Reexport
 @reexport using InteractBase
 using WebIO, Vue, DataStructures, CSSUtil
@@ -41,14 +40,14 @@ const all_js = joinpath(Pkg.dir("InteractBase"), "assets", "all.js")
 
 function InteractBase.libraries(::Bulma)
     bulmalibs = InteractBase.isijulia() ?
-        [AssetRegistry.register(main_css)] :
+        [main_css] :
         [
-            AssetRegistry.register(bulma_min_css),
-            AssetRegistry.register(bulma_slider_min_css),
-            AssetRegistry.register(bulma_switch_min_css),
-            AssetRegistry.register(bulma_checkradio_min_css),
+            bulma_min_css,
+            bulma_slider_min_css,
+            bulma_switch_min_css,
+            bulma_checkradio_min_css,
         ]
-    vcat(AssetRegistry.register(all_js), bulmalibs)
+    vcat(all_js, bulmalibs)
 end
 
 function __init__()
